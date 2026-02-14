@@ -1,0 +1,84 @@
+create database week5;
+use week5;
+
+-- 5.1 Not Null Constraints
+CREATE TABLE STUDENT(ROLL_NO INT NOT NULL, STU_NAME VARCHAR(35) NOT NULL, STU_AGE INT NOT NULL, STU_ADDRESS VARCHAR(35), PRIMARY KEY (ROLL_NO));
+
+INSERT INTO STUDENT VALUES
+(6201,'raj',18,'meerpet'),
+(6202,'sam',19,'lb nagar'),
+(6203,'ram',20,'dilsukhnagar'),
+(6204,'ravi',21,'kukatpally'),
+(6205,'kiran',22,'ameerpet');
+
+SELECT * FROM STUDENT;
+
+-- 5.2 Unique Constraints
+CREATE TABLE STUDENT1(ROLL_NO INT NOT NULL, STU_NAME VARCHAR(35) NOT NULL UNIQUE, STU_AGE INT NOT NULL, STU_ADDRESS VARCHAR(35) UNIQUE, PRIMARY KEY (ROLL_NO));
+
+INSERT INTO STUDENT1 VALUES
+(6301,'arun',18,'meerpet'),
+(6302,'bala',19,'lb nagar'),
+(6303,'charan',20,'dilsukhnagar'),
+(6304,'dinesh',21,'kukatpally'),
+(6305,'eswar',22,'ameerpet');
+
+SELECT * FROM STUDENT1;
+
+-- 5.3 Default Constraints
+CREATE TABLE STUDENT2(ROLL_NO INT NOT NULL, STU_NAME VARCHAR(35) NOT NULL, STU_AGE INT NOT NULL, EXAM_FEE INT DEFAULT 10000, STU_ADDRESS VARCHAR(35), PRIMARY KEY (ROLL_NO));
+
+INSERT INTO STUDENT2(ROLL_NO,STU_NAME,STU_AGE,STU_ADDRESS) VALUES
+(6401,'raj',18,'meerpet'),
+(6402,'sam',19,'lb nagar'),
+(6403,'ram',20,'dilsukhnagar'),
+(6404,'ravi',21,'kukatpally'),
+(6405,'kiran',22,'ameerpet');
+
+SELECT * FROM STUDENT2;
+
+-- 5.4 Check Constraints
+CREATE TABLE STUDENT3(ROLL_NO INT NOT NULL CHECK (ROLL_NO > 1000), STU_NAME VARCHAR(35) NOT NULL, STU_AGE INT NOT NULL, EXAM_FEE INT DEFAULT 10000, STU_ADDRESS VARCHAR(35), PRIMARY KEY (ROLL_NO));
+
+INSERT INTO STUDENT3 VALUES
+(1101,'raj',18,12000,'meerpet'),
+(1102,'sam',19,12000,'lb nagar'),
+(1103,'ram',20,12000,'dilsukhnagar'),
+(1104,'ravi',21,12000,'kukatpally'),
+(1105,'kiran',22,12000,'ameerpet');
+
+SELECT * FROM STUDENT3;
+
+-- 5.5 Auto Increment Constraints
+CREATE TABLE PERSONS1( Personid INT NOT NULL AUTO_INCREMENT, LastName VARCHAR(255) NOT NULL, FirstName VARCHAR(255), Age INT, PRIMARY KEY (Personid));
+
+INSERT INTO PERSONS1(LastName,FirstName,Age) VALUES
+('reddy','ramana',23),
+('kumar','arun',24),
+('rao','charan',25),
+('sharma','dinesh',26),
+('verma','eswar',27);
+
+SELECT * FROM PERSONS1;
+
+-- Try Program: Primary Key and Foreign Key
+CREATE TABLE DEPARTMENT(DEPT_ID INT NOT NULL, DEPT_NAME VARCHAR(50), PRIMARY KEY(DEPT_ID));
+
+CREATE TABLE EMPLOYEE(EMP_ID INT NOT NULL, EMP_NAME VARCHAR(50), DEPT_ID INT, PRIMARY KEY(EMP_ID), FOREIGN KEY(DEPT_ID) REFERENCES DEPARTMENT(DEPT_ID));
+
+INSERT INTO DEPARTMENT VALUES
+(1,'CSE'),
+(2,'ECE'),
+(3,'EEE'),
+(4,'MECH'),
+(5,'CIVIL');
+
+INSERT INTO EMPLOYEE VALUES
+(101,'raj',1),
+(102,'sam',2),
+(103,'ram',3),
+(104,'ravi',4),
+(105,'kiran',5);
+
+SELECT * FROM DEPARTMENT;
+SELECT * FROM EMPLOYEE;
